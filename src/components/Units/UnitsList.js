@@ -10,17 +10,23 @@ const UnitsList = () => {
 
   const filteredData = useMemo(() => {
     const ageDimensions = dimensions.age;
-    // ADD COST FILTER
+    const costDimensions = dimensions.cost;
 
     return data.units.filter((datum) => {
-      if (ageDimensions) {
-        if (ageDimensions === "All") {
-          return datum;
-        }
-        return datum.age === ageDimensions;
+      if (ageDimensions === "All") {
+        return (
+          (!datum.cost?.Food || datum.cost?.Food <= costDimensions.food) &&
+          (!datum.cost?.Wood || datum.cost?.Wood <= costDimensions.wood) &&
+          (!datum.cost?.Gold || datum.cost?.Gold <= costDimensions.gold)
+        );
       }
 
-      //ADD LOGIC FOR ALL POSSIBLE FILTERING OPTIONS
+      return (
+        datum.age === ageDimensions &&
+        (!datum.cost?.Food || datum.cost?.Food <= costDimensions.food) &&
+        (!datum.cost?.Wood || datum.cost?.Wood <= costDimensions.wood) &&
+        (!datum.cost?.Gold || datum.cost?.Gold <= costDimensions.gold)
+      );
     });
   }, [dimensions]);
 
@@ -40,7 +46,13 @@ const UnitsList = () => {
               <Link to={`/unit-details/${unit.id}`}>{unit.name}</Link>
             </td>
             <td>{unit.age}</td>
-            <td>{"costs"}</td>
+            <td>
+              {unit.cost === null
+                ? "-"
+                : Object.keys(unit.cost).map((key) => (
+                    <p key={key}>{`${key}: ${unit.cost[key]}`}</p>
+                  ))}
+            </td>
           </tr>
         ))}
       </tbody>

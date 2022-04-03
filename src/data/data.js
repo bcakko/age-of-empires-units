@@ -2148,6 +2148,5 @@ const data = {
     },
   ],
 };
-export default data;
 
-export const header = Object.keys(data.units[0]);
+export default data;
