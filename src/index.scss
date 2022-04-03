@@ -1,3 +1,17 @@
+html {
+  box-sizing: border-box;
+  --main-purple: #2C061F;
+  --main-gray: #374045;
+  --main-yellow: #D89216;
+  --main-beige: #E1D89F;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,6 +19,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--main-gray);
 }
 
 code {
