@@ -1,10 +1,10 @@
-import FilterForm from "../components/Units/FilterForm";
 import UnitsList from "../components/Units/UnitsList";
+import Filters from "../components/Units/Filters";
 
 const Units = () => {
   return (
     <div>
-      <FilterForm />
+      <Filters />
       <UnitsList />
     </div>
   );

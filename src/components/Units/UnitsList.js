@@ -15,17 +15,29 @@ const UnitsList = () => {
     return data.units.filter((datum) => {
       if (ageDimensions === "All") {
         return (
-          (!datum.cost?.Food || datum.cost?.Food <= costDimensions.food) &&
-          (!datum.cost?.Wood || datum.cost?.Wood <= costDimensions.wood) &&
-          (!datum.cost?.Gold || datum.cost?.Gold <= costDimensions.gold)
+          (!datum.cost?.Food ||
+            (datum.cost?.Food <= costDimensions.food.max &&
+              datum.cost?.Food >= costDimensions.food.min)) &&
+          (!datum.cost?.Wood ||
+            (datum.cost?.Wood <= costDimensions.wood.max &&
+              datum.cost?.Wood >= costDimensions.wood.min)) &&
+          (!datum.cost?.Gold ||
+            (datum.cost?.Gold <= costDimensions.gold.max &&
+              datum.cost?.Gold >= costDimensions.gold.min))
         );
       }
 
       return (
         datum.age === ageDimensions &&
-        (!datum.cost?.Food || datum.cost?.Food <= costDimensions.food) &&
-        (!datum.cost?.Wood || datum.cost?.Wood <= costDimensions.wood) &&
-        (!datum.cost?.Gold || datum.cost?.Gold <= costDimensions.gold)
+        (!datum.cost?.Food ||
+          (datum.cost?.Food <= costDimensions.food.max &&
+            datum.cost?.Food >= costDimensions.food.min)) &&
+        (!datum.cost?.Wood ||
+          (datum.cost?.Wood <= costDimensions.wood.max &&
+            datum.cost?.Wood >= costDimensions.wood.min)) &&
+        (!datum.cost?.Gold ||
+          (datum.cost?.Gold <= costDimensions.gold.max &&
+            datum.cost?.Gold >= costDimensions.gold.min))
       );
     });
   }, [dimensions]);

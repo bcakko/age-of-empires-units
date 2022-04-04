@@ -8,4 +8,4 @@ const UnitDetails = () => {
   )
 }
 
-export default UnitDetails
+export default UnitDetails;

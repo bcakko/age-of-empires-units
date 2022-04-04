@@ -2,7 +2,23 @@ import ActionTypes from "../actionTypes";
 
 const initialState = {
   age: "All",
-  cost: { food: "200", wood: "200", gold: "200" },
+  cost: {
+    food: {
+      active: false,
+      min: "0",
+      max: "200",
+    },
+    wood: {
+      active: false,
+      min: "0",
+      max: "200",
+    },
+    gold: {
+      active: false,
+      min: "0",
+      max: "200",
+    },
+  },
 };
 
 const dimensionReducer = (state = initialState, action) => {
@@ -12,7 +28,30 @@ const dimensionReducer = (state = initialState, action) => {
       return newState;
     }
     case ActionTypes.dimension.CHANGE_COST_DIMENSION: {
-      const newState = { age: state.age, cost: {...state.cost, [action.payload.name]: action.payload.number} };
+      const newState = {
+        age: state.age,
+        cost: {
+          ...state.cost,
+          [action.payload.name]: {
+            ...state.cost[action.payload.name],
+            min: action.payload.min,
+            max: action.payload.max,
+          },
+        },
+      };
+      return newState;
+    }
+    case ActionTypes.dimension.ACTIVATE_COST_DIMENSION: {
+      const newState = {
+        age: state.age,
+        cost: {
+          ...state.cost,
+          [action.payload.name]: {
+            ...state.cost[action.payload.name],
+            active: !state.cost[action.payload.name].active,
+          },
+        },
+      };
       return newState;
     }
     default: {
