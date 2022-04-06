@@ -1,12 +1,17 @@
 .header {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   background-color: var(--main-gray);
   padding: 1.25rem;
   margin: 0 0 4vw 0;
   font-size: 1.25rem;
   box-shadow: 0 0 2px var(--light-purple);
+
+  .icon {
+    width: 3rem;
+    height: 3rem;
+  }
 
   ul {
     list-style: none;
@@ -27,5 +32,14 @@
   .active {
     color: var(--main-purple);
     border-bottom: 4px solid var(--main-red);
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .header {
+    justify-content: center;
+    .icon {
+      display: none;
+    }
   }
 }

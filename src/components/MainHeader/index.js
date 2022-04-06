@@ -1,9 +1,11 @@
 import { NavLink } from "react-router-dom";
+import { GiSpartanHelmet } from "react-icons/gi";
 import classes from "./styles.module.scss";
 
 const MainHeader = () => {
   return (
     <div className={classes.header}>
+      <GiSpartanHelmet className={classes.icon}/>
       <nav>
         <ul>
           <li>

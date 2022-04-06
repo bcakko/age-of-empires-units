@@ -12,6 +12,7 @@ const UnitProperties = () => {
   const paramId = +params.unitId;
 
   let unitData = {};
+  let cost = {};
 
   const singleUnitData = dataDimension.find((unit) => unit.id === paramId);
 
@@ -19,6 +20,9 @@ const UnitProperties = () => {
     return <NotFoundPage />;
   } else {
     unitData = singleUnitData;
+    if (unitData.cost) {
+      cost = unitData.cost;
+    }
   }
 
   return (
@@ -42,15 +46,15 @@ const UnitProperties = () => {
         </tr>
         <tr>
           <th>Wood Cost:</th>
-          <td>{unitData.cost?.Wood || "-"}</td>
+          <td>{cost.Wood || "-"}</td>
         </tr>
         <tr>
           <th>Food Cost:</th>
-          <td>{unitData.cost?.Food || "-"}</td>
+          <td>{cost.Food || "-"}</td>
         </tr>
         <tr>
           <th>Gold Cost:</th>
-          <td>{unitData.cost?.Gold || "-"}</td>
+          <td>{cost.Gold || "-"}</td>
         </tr>
         <tr>
           <th>Build Time:</th>
