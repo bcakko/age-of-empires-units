@@ -6,6 +6,20 @@ import CostFilter from "../Filters/CostFilter";
 import UnitsList from "../UnitsList";
 import store from "../../store";
 
+// Function to restore the first cost filter state
+const returnToPrevCostDimension = (min, max) => {
+  fireEvent.change(min, {
+    target: {
+      value: "0",
+    },
+  });
+  fireEvent.change(max, {
+    target: {
+      value: "200",
+    },
+  });
+};
+
 afterEach(() => {
   cleanup();
 });
@@ -19,7 +33,7 @@ describe("Testing CostFilter mounting and functionality", () => {
     );
 
     const costFilter = screen.getByTestId("cost-filter");
-    
+
     expect(costFilter).toBeInTheDocument();
   });
 
@@ -49,10 +63,11 @@ describe("Testing CostFilter mounting and functionality", () => {
         value: "85",
       },
     });
-
     expect(unitsList).toHaveTextContent("Teutonic Knight");
     expect(unitsList).toHaveTextContent("Petard");
     expect(unitsList).not.toHaveTextContent("Spearman");
+
+    returnToPrevCostDimension(minRangeInput, maxRangeInput);
   });
 
   test("should update content on wood range changes", () => {
@@ -85,6 +100,8 @@ describe("Testing CostFilter mounting and functionality", () => {
     expect(unitsList).toHaveTextContent("Trade Cog");
     expect(unitsList).toHaveTextContent("War Wagon");
     expect(unitsList).not.toHaveTextContent("Transport Ship");
+
+    returnToPrevCostDimension(minRangeInput, maxRangeInput);
   });
 
   test("should update content on gold range changes", () => {
@@ -117,6 +134,8 @@ describe("Testing CostFilter mounting and functionality", () => {
     expect(unitsList).toHaveTextContent("Cannon Galleon");
     expect(unitsList).toHaveTextContent("Elite Cannon Galleon");
     expect(unitsList).not.toHaveTextContent("Siege Onager");
+
+    returnToPrevCostDimension(minRangeInput, maxRangeInput);
   });
 
   test("should render warning when no units found", () => {
@@ -148,5 +167,7 @@ describe("Testing CostFilter mounting and functionality", () => {
     expect(unitsList).not.toHaveTextContent("Teutonic Knight");
     expect(unitsList).not.toHaveTextContent("Petard");
     expect(unitsList).not.toHaveTextContent("Spearman");
+
+    returnToPrevCostDimension(minRangeInput, maxRangeInput);
   });
 });

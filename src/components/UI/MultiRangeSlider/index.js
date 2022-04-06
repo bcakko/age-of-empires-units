@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState, useRef } from "react";
 import PropTypes from "prop-types";
 import "./styles.scss";
+import { useSelector } from "react-redux";
 
 const MultiRangeSlider = ({
   disabled,
@@ -10,10 +11,13 @@ const MultiRangeSlider = ({
   onChange,
   dataTestid,
 }) => {
-  const [minVal, setMinVal] = useState(min);
-  const [maxVal, setMaxVal] = useState(max);
-  const minValRef = useRef(min);
-  const maxValRef = useRef(max);
+  const dimensions = useSelector((state) => state.dimensions);
+  const costDimension = dimensions.cost;
+
+  const [minVal, setMinVal] = useState(costDimension[name].min);
+  const [maxVal, setMaxVal] = useState(costDimension[name].max);
+  const minValRef = useRef(costDimension[name].min);
+  const maxValRef = useRef(costDimension[name].max);
   const range = useRef(null);
 
   // Convert to percentage
