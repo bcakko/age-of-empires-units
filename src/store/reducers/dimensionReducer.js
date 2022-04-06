@@ -1,30 +1,38 @@
 import ActionTypes from "../actionTypes";
+import units from "../../assets/unitsData.json";
+
+const data = units;
 
 const initialState = {
   age: "All",
   cost: {
     food: {
       active: false,
-      min: "0",
-      max: "200",
+      min: 0,
+      max: 200,
     },
     wood: {
       active: false,
-      min: "0",
-      max: "200",
+      min: 0,
+      max: 200,
     },
     gold: {
       active: false,
-      min: "0",
-      max: "200",
+      min: 0,
+      max: 200,
     },
   },
+  data,
 };
 
 const dimensionReducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.dimension.CHANGE_AGE_DIMENSION: {
-      const newState = { age: action.payload, cost: state.cost };
+      const newState = {
+        age: action.payload,
+        cost: state.cost,
+        data: state.data,
+      };
       return newState;
     }
     case ActionTypes.dimension.CHANGE_COST_DIMENSION: {
@@ -38,6 +46,7 @@ const dimensionReducer = (state = initialState, action) => {
             max: action.payload.max,
           },
         },
+        data: state.data,
       };
       return newState;
     }
@@ -51,6 +60,7 @@ const dimensionReducer = (state = initialState, action) => {
             active: !state.cost[action.payload.name].active,
           },
         },
+        data: state.data,
       };
       return newState;
     }

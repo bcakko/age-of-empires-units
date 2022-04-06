@@ -1,12 +1,12 @@
-import UnitsList from "../components/Units/UnitsList";
-import Filters from "../components/Units/Filters";
+import UnitsList from "../components/UnitsList";
+import Filters from "../components/Filters";
 
 const Units = () => {
   return (
-    <div>
+    <>
       <Filters />
       <UnitsList />
-    </div>
+    </>
   );
 };
 

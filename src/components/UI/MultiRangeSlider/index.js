@@ -1,8 +1,15 @@
 import React, { useCallback, useEffect, useState, useRef } from "react";
 import PropTypes from "prop-types";
-import "./MultiRangeSlider.scss";
+import "./styles.scss";
 
-const MultiRangeSlider = ({ disabled, name, min, max, onChange }) => {
+const MultiRangeSlider = ({
+  disabled,
+  name,
+  min,
+  max,
+  onChange,
+  dataTestid,
+}) => {
   const [minVal, setMinVal] = useState(min);
   const [maxVal, setMaxVal] = useState(max);
   const minValRef = useRef(min);
@@ -15,26 +22,16 @@ const MultiRangeSlider = ({ disabled, name, min, max, onChange }) => {
     [min, max]
   );
 
-  // Set width of the range to decrease from the left side
+  // Set width of the range to decrease from both sides
   useEffect(() => {
     const minPercent = getPercent(minVal);
-    const maxPercent = getPercent(maxValRef.current);
-
+    const maxPercent = getPercent(maxVal);
     if (range.current) {
       range.current.style.left = `${minPercent}%`;
+      range.current.style.right = `${maxPercent}%`;
       range.current.style.width = `${maxPercent - minPercent}%`;
     }
-  }, [minVal, getPercent]);
-
-  // Set width of the range to decrease from the right side
-  useEffect(() => {
-    const minPercent = getPercent(minValRef.current);
-    const maxPercent = getPercent(maxVal);
-
-    if (range.current) {
-      range.current.style.width = `${maxPercent - minPercent}%`;
-    }
-  }, [maxVal, getPercent]);
+  }, [minVal, maxVal, getPercent]);
 
   // Get min and max values when their state changes
   useEffect(() => {
@@ -47,7 +44,7 @@ const MultiRangeSlider = ({ disabled, name, min, max, onChange }) => {
       setMinVal(min);
       setMaxVal(max);
     }
-  }, [disabled, min, max]);
+  }, [disabled]);
 
   return (
     <div className="container">
@@ -58,14 +55,15 @@ const MultiRangeSlider = ({ disabled, name, min, max, onChange }) => {
         value={minVal}
         step="5"
         onChange={(event) => {
-          const value = Math.min(Number(event.target.value), maxVal - 1);
+          const value = Math.min(Number(event.target.value), maxVal - 5);
           setMinVal(value);
           minValRef.current = value;
         }}
-        className="thumb thumb--left"
+        className={`thumb thumb--left ${disabled ? "passive-thumb" : ""}`}
         disabled={disabled}
         name={name}
         style={{ zIndex: minVal > max - 100 && "5" }}
+        data-testid={dataTestid.low}
       />
       <input
         type="range"
@@ -74,18 +72,21 @@ const MultiRangeSlider = ({ disabled, name, min, max, onChange }) => {
         value={maxVal}
         step="5"
         onChange={(event) => {
-          const value = Math.max(Number(event.target.value), minVal + 1);
+          const value = Math.max(Number(event.target.value), minVal + 5);
           setMaxVal(value);
           maxValRef.current = value;
         }}
         disabled={disabled}
         name={name}
-        className="thumb thumb--right"
+        className={`thumb thumb--left ${disabled ? "passive-thumb" : ""}`}
+        data-testid={dataTestid.high}
       />
-
-      <div className="slider">
+      <div className="slider" tabIndex="-1">
         <div className="slider__track" />
-        <div ref={range} className="slider__range" />
+        <div
+          ref={range}
+          className={`slider__range${disabled ? "__passive" : ""}`}
+        />
         <div className="slider__left-value">{minVal}</div>
         <div className="slider__right-value">{maxVal}</div>
       </div>
@@ -98,6 +99,8 @@ MultiRangeSlider.propTypes = {
   min: PropTypes.number.isRequired,
   max: PropTypes.number.isRequired,
   onChange: PropTypes.func.isRequired,
+  disabled: PropTypes.bool.isRequired,
+  dataTestid: PropTypes.object,
 };
 
 export default MultiRangeSlider;

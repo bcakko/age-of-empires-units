@@ -1,10 +1,10 @@
-import ImageContainer from "../components/HomePage/ImageContainer";
+import ImageContainer from "../components/ImageContainer";
 
 const HomePage = () => {
   return (
-    <div>
+    <>
       <ImageContainer />
-    </div>
+    </>
   );
 };
 

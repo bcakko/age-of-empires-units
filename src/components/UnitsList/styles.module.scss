@@ -1,0 +1,46 @@
+.unitsTable {
+  margin: 1rem auto;
+  table-layout: fixed;
+  width: 70%;
+  background-color: var(--dark-red);
+  border-collapse: collapse;
+
+  th,
+  td {
+    border: 2px solid black;
+    padding: 0.375rem;
+  }
+
+  th {
+    font-size: 1.25rem;
+    color: white;
+  }
+
+  td {
+    color: var(--light-purple);
+    overflow: hidden;
+  }
+  a {
+    text-decoration: none;
+    color: white;
+  }
+
+  .id-head {
+    width: 3rem;
+  }
+
+  .not-found {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .unitsTable {
+    width: 98%;
+  }
+}
+@media screen and (max-width: 425px) {
+  .unitsTable {
+    width: 100%;
+  }
+}

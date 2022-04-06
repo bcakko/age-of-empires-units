@@ -1,0 +1,36 @@
+.detailsTable {
+  margin: 0 auto;
+  table-layout: fixed;
+  width: 70%;
+  background-color: var(--dark-red);
+  border-collapse: collapse;
+
+  th,
+  td {
+    border: 2px solid black;
+    padding: 10px;
+  }
+
+  th {
+    font-size: 1.25rem;
+    color: white;
+  }
+  td {
+    color: var(--light-purple);
+  }
+
+  .id-head {
+    width: 3rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .detailsTable {
+    width: 98%;
+  }
+}
+@media screen and (max-width: 425px) {
+  .detailsTable {
+    width: 100%;
+  }
+}

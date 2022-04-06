@@ -1,0 +1,22 @@
+.age-group,
+.cost-group {
+  margin: 0 auto;
+  width: 70%;
+
+  h3 {
+    color: var(--main-gray);
+    margin: 5px 0;
+  }
+}
+
+.cost-group {
+  margin: 0 auto;
+  width: 70%;
+}
+
+@media screen and (max-width: 768px) {
+  .age-group,
+  .cost-group {
+    width: 98%;
+  }
+}

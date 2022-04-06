@@ -1,11 +1,12 @@
-import { useParams } from 'react-router-dom';
+import React from "react";
+import UnitProperties from "../components/UnitProperties";
 
 const UnitDetails = () => {
-  const params = useParams();
-
   return (
-    <div>UnitDetails {params.unitId}</div>
-  )
-}
+    <>
+      <UnitProperties />
+    </>
+  );
+};
 
 export default UnitDetails;

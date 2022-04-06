@@ -1,10 +1,9 @@
 import { NavLink } from "react-router-dom";
-import classes from "./MainHeader.module.scss";
+import classes from "./styles.module.scss";
 
 const MainHeader = () => {
   return (
     <div className={classes.header}>
-      <h1>Age of Empires II Units</h1>
       <nav>
         <ul>
           <li>

@@ -1,0 +1,46 @@
+.ages {
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-evenly;
+  background: var(--dark-red);
+  padding: 0.5rem;
+  position: relative;
+  font-size: 2rem;
+
+  input {
+    width: 19%;
+    height: 100%;
+    appearance: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 2px;
+    padding: 4px 8px;
+    background: var(--main-purple);
+    color: var(--main-gray);
+    font-size: 1.25rem;
+    overflow: hidden;
+    transition: all 100ms linear;
+  }
+
+  input:checked {
+    background: var(--light-purple);
+    color: #fff;
+    box-shadow: 0 1px 1px #0000002e;
+    text-shadow: 0 1px 0px #79485f7a;
+  }
+
+  input:before {
+    content: attr(label);
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .ages {
+    input {
+      font-size: 1rem;
+    }
+  }
+}
